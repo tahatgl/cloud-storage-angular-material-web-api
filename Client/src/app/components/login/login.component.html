@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>CloudStorage</h1>
+    <div>
+      <a mat-button [routerLink]="'/register'"> Üye Ol </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
+      </mat-card-header>
+
+      <form class="example-form">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" name="mail" #mail placeholder="E-mail Adresiniz" required>
+          </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" name="password" #password placeholder="Parolanız" required>
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-stroked-button type="submit" color="primary" class="btn-block" (click)="Login(mail.value, password.value)">Log in</button>
+        <button mat-button class="forgot text-muted" [routerLink]="['/register']" style="margin-top: 10px;">Üye Değil misin?</button>
+      </form>
+    </mat-card>
+  </div>

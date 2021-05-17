@@ -1,0 +1,55 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>CloudStorage</h1>
+    <div>
+      <a mat-button (click)="Logout()"> Çıkış </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container" style="padding: 5%;">
+
+  <mat-table [dataSource]="dataSource" matSort>
+    
+    <ng-container matColumnDef="Names">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.Names}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ContentTypes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Tipi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.ContentTypes}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.Description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Functions">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+        <button mat-icon-button color="warn" matTooltip="Sil" (click)="DeleteFile(kayit.ID)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+<div class="container">
+  <input type="file" hidden="true" #file (change)="SelectFile($event)">
+  <button mat-raised-button color="primary" (click)="file.click()">Dosya Seç</button>
+
+  <button mat-raised-button color="primary" (click)="Upload()" [disabled]="!selected">Yükle</button>&nbsp;
+</div>

@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>CloudStorage</h1>
+    <div>
+      <a mat-button [routerLink]="'/login'"> Giriş Yap </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput name="username" #username placeholder="Kullanıcı adı girin" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput name="mail" #mail placeholder="E-mail Adresiniz" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput name="password" #password placeholder="Password" placeholder="Parolanız" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Rol seçin</mat-label>
+          <mat-select name="role" #role>
+            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <button mat-stroked-button color="accent" class="btn-block" (click)="Register(username.value, mail.value, password.value, role.value)">Register</button>
+      <button mat-button class="forgot text-muted" [routerLink]="['/login']" style="margin-top: 10px;">Zaten Üye misin?</button>
+    </form>
+  </mat-card>
+</div>

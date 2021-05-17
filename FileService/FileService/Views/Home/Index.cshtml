@@ -1,0 +1,127 @@
+﻿<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" method="get" action="@Url.Action("fileListForUser", "api/user")" id="ajaxFileListButton" novalidate="novalidate">
+
+            <fieldset>
+                <legend>GetAllList For User Form</legend>
+                <ol>
+                    <li>
+                        <label>User Id </label>
+                        <input type="text" style="width:317px" name="userId" id="userId">
+                    </li>
+                    <li>
+                        <label>Role Id </label>
+                        <input type="text" style="width:317px" name="roleId" id="roleId">
+                    </li>
+                    <li>
+                        <input type="submit" value="GetAllFileList" id="ajaxFileListButton" class="btn">
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form enctype="application/x-www-form-urlencoded" method="post" action="@Url.Action("createUser", "api/user")" id="ajaxCreateUserButton" novalidate="novalidate">
+
+            <fieldset>
+                <legend>CreateUser Form</legend>
+                <ol>
+                    <li>
+                        <label>User Name </label>
+                        <input type="text" style="width:317px" name="Name" id="Name">
+                    </li>
+                    <li>
+                        <label>mail </label>
+                        <input type="text" style="width:317px" name="Mail" id="Mail">
+                    </li>
+                    <li>
+                        <label>Password </label>
+                        <input type="text" style="width:317px" name="Password" id="Password">
+                    </li>
+                    <li>
+                        <label>Role </label>
+                        <input type="text" style="width:317px" name="Role" id="Role">
+                    </li>
+                    <li>
+                        <input type="submit" value="CreateUser" id="ajaxCreateUserButton" class="btn">
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" method="post" action="@Url.Action("fileUpload", "api/file")" id="ajaxUploadForm" novalidate="novalidate">
+
+            <fieldset>
+                <legend>Upload Form</legend>
+                <ol>
+                    <li>
+                        <label>User Id </label>
+                        <input type="text" style="width:317px" name="UserId" id="UserId">
+                    </li>
+                    <li>
+                        <label>Description </label>
+                        <input type="text" style="width:317px" name="description" id="description">
+                    </li>
+                    <li>
+                        <label>upload </label>
+                        <input type="file" id="fileInput" name="fileInput" multiple>
+                    </li>
+                    <li>
+                        <input type="submit" value="Upload" id="ajaxUploadButton" class="btn">
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" method="get" action="@Url.Action("login", "api/user")" id="ajaxloginButton" novalidate="novalidate">
+
+            <fieldset>
+                <legend>Login Form</legend>
+                <ol>
+                    <li>
+                        <label>Mail </label>
+                        <input type="text" style="width:317px" name="mail" id="mail">
+                    </li>
+                    <li>
+                        <label>Password </label>
+                        <input type="text" style="width:317px" name="password" id="password">
+                    </li>
+                    <li>
+                        <input type="submit" value="GetAllFileList" id="ajaxloginButton" class="btn">
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form enctype="application/x-www-form-urlencoded" method="get" action="@Url.Action("deleteFile", "api/file")" id="ajaxDeleteFileButton" novalidate="novalidate">
+
+            <fieldset>
+                <legend>Delete File Form</legend>
+                <ol>
+                    <li>
+                        <label>Delete file id </label>
+                        <input type="text" style="width:317px" name="id" id="id">
+                    </li>
+                    <li>
+                        <input type="submit" value="DeleteFileId" id="ajaxDeleteFileButton" class="btn">
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-4">
+        
+    </div>
+</div>
+
