@@ -38,9 +38,10 @@ namespace FileService.Controllers
                 DownloadLink = "TODO, will implement when file is persisited"
             };
 
-            bool status = HelperDataLib.Insert.InsertFileUploads(fu.UserID, fu.FileNames, fu.Description, fu.CreatedTimestamp, fu.UpdatedTimestamp, fu.DownloadLink, fu.ContentTypes, fu.Names); 
-
+            bool status = HelperDataLib.Insert.InsertFileUploads(fu.UserID, fu.FileNames, fu.Description, fu.CreatedTimestamp, fu.UpdatedTimestamp, fu.DownloadLink, fu.ContentTypes, fu.Names);
+            
             return fu;
+            
         }
 
 

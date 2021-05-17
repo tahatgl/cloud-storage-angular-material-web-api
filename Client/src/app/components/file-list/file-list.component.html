@@ -47,9 +47,15 @@
 
 </div>
 
-<div class="container">
+<div class="container" style="padding: 5%;">
   <input type="file" hidden="true" #file (change)="SelectFile($event)">
   <button mat-raised-button color="primary" (click)="file.click()">Dosya Seç</button>
 
-  <button mat-raised-button color="primary" (click)="Upload()" [disabled]="!selected">Yükle</button>&nbsp;
+  <!--<input matInput type="text" [(ngModel)]="description" style="width: 15vw;">-->
+
+    <mat-form-field class="example-full-width"  style="margin-left: 3%;">
+      <textarea matInput #inputt placeholder="Dosya açıklaması..." type="text" [(ngModel)]="description"></textarea>
+    </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="Upload(file)" [disabled]="!selected || !description"  style="margin-left: 3%;">Yükle</button>&nbsp;
 </div>

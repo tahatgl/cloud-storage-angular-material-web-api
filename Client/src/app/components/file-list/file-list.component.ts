@@ -15,20 +15,23 @@ export class FileListComponent implements OnInit {
   userId: number;
   roleId: number;
   dataSource: any;
-  displayedColumns = ['Names', 'ContentTypes', 'Description' ,'Functions'];
+  displayedColumns = ['Names', 'ContentTypes', 'Description', 'Functions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   selected: FileList;
   uploadFile: Files;
 
-  constructor(private apiService: ApiService, private route: Router) { 
+  description: string = null;
+
+  constructor(private apiService: ApiService, private route: Router) {
     var user = JSON.parse(localStorage.getItem("user"));
     this.userId = user.ID;
-    this.roleId = user.Role;}
+    this.roleId = user.Role;
+  }
 
   ngOnInit() {
     this.FileList();
-    
+
   }
 
   FileList() {
@@ -55,18 +58,25 @@ export class FileListComponent implements OnInit {
     this.selected = event.target.files;
   }
 
-  Upload() {
-    const file = this.selected.item(0);
-    this.selected = undefined;
+  Upload(input: HTMLInputElement) {
+    const reader = new FileReader();
+    reader.readAsDataURL(input.files[0]);
+    reader.onload = () => {
+      var user = JSON.parse(localStorage.getItem("user"));
+      const imageName = input.files[0].name;
+      const postImage = new FormData();
+      postImage.append('file', input.files[0], imageName);
+      postImage.append('UserID', user.ID)
+      postImage.append('Description', this.description);
+      this.apiService.FileUpload(postImage).subscribe(q => {
+        this.FileList();
+        this.selected = undefined;
+        this.description = null;
+      }, err => {
+        console.log(err.message);
+      });
+    };
 
-    this.uploadFile = new Files(file);
-    var user = JSON.parse(localStorage.getItem("user"));
-    this.uploadFile.UserID = user.ID;
-    this.apiService.FileUpload(this.uploadFile).subscribe(q => {
-      this.FileList();
-    }, err => {
-      console.log(err.message);
-    });
   }
 
 }

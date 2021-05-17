@@ -28,7 +28,7 @@ Register(user: User) {
   return this.http.post(this.apiUrl + "user/createUser", user);
 }
 
-FileUpload(file: Files) {
+FileUpload(file: FormData) {
   return this.http.post(this.apiUrl + "file/fileUpload", file);
 }
 
