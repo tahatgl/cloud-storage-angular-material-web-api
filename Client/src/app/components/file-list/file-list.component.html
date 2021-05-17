@@ -54,7 +54,8 @@
   <!--<input matInput type="text" [(ngModel)]="description" style="width: 15vw;">-->
 
     <mat-form-field class="example-full-width"  style="margin-left: 3%;">
-      <textarea matInput #inputt placeholder="Dosya açıklaması..." type="text" [(ngModel)]="description"></textarea>
+      <mat-label>Açıklama Ekleyin</mat-label>
+      <textarea matInput #inputt placeholder="dosya açıklaması..." type="text" [(ngModel)]="description"></textarea>
     </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="Upload(file)" [disabled]="!selected || !description"  style="margin-left: 3%;">Yükle</button>&nbsp;
