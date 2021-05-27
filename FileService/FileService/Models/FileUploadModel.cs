@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FileService.Models
 {
-    public class FileUpload
+    public class FileUploadModel
     {
         public int ID { get; set; }
         public int UserID { get; set; }

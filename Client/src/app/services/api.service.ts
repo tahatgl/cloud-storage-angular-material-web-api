@@ -7,7 +7,8 @@ import { Files } from '../models/files';
   providedIn: 'root'
 })
 export class ApiService {
-  apiUrl = "https://localhost:44391/api/";
+  //apiUrl = "https://localhost:44391/api/";
+  apiUrl = "http://localhost:8091/api/";
 
 constructor(private http: HttpClient) { 
 }

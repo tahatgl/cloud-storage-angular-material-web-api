@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,12 +23,12 @@ namespace FileService.Controllers
         [Route("fileUpload")]
         [HttpPost]
         [ValidateMimeMultipartContentFilter]
-        public async Task<FileUpload> UploadSingleFile()
+        public async Task<FileUploadModel> UploadSingleFile()
         {
             var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
             await Request.Content.ReadAsMultipartAsync(streamProvider);
 
-            FileUpload fu = new FileUpload
+            FileUploadModel fu = new FileUploadModel
             {
                 UserID = Convert.ToInt32(streamProvider.FormData["UserId"]),
                 FileNames = streamProvider.FileData.Select(entry => entry.LocalFileName).ToList()[0].ToString(),
@@ -51,7 +53,16 @@ namespace FileService.Controllers
         [HttpGet]
         public bool DeleteFile(int id)
         {
-            bool status = HelperDataLib.Delete.DeleteFile(id);
+            DataTable dt = HelperDataLib.Select.GetById(id);
+            bool status = false;
+
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                string filePath = dt.Rows[0]["FileNames"].ToString();
+                File.Delete(filePath);
+
+                status = HelperDataLib.Delete.DeleteFile(id);
+            }
 
             return status;
         }

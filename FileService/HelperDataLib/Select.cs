@@ -54,6 +54,43 @@ namespace HelperDataLib
             return dt;
         }
 
+        public static DataTable GetById(int id)
+        {
+            DataTable dt = new DataTable();
+            SqlConnection con = Connection.OpenConnection();
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"select * from FileUpload where ID = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return dt;
+        }
+
         public static DataTable login(string mail, string password)
         {
             DataTable dt = new DataTable();
@@ -69,6 +106,43 @@ namespace HelperDataLib
 
                     cmd.Parameters.AddWithValue("@mail", mail);
                     cmd.Parameters.AddWithValue("@password", password);
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return dt;
+        }
+
+        public static DataTable GetUserList(int roleId)
+        {
+            DataTable dt = new DataTable();
+            SqlConnection con = Connection.OpenConnection();
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+
+                    if (roleId == Convert.ToInt32(ConfigurationManager.AppSettings["adminRoleId"]))
+                        cmd.CommandText = "select * from [User]";
 
                     if (con.State != ConnectionState.Open)
                     {

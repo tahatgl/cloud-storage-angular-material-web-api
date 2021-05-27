@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FileListComponent implements OnInit {
   files: Files[];
-  userId: number;
-  roleId: number;
+  user: any;
   dataSource: any;
   displayedColumns = ['Names', 'ContentTypes', 'Description', 'Functions'];
   @ViewChild(MatSort) sort: MatSort;
@@ -24,9 +23,7 @@ export class FileListComponent implements OnInit {
   description: string = null;
 
   constructor(private apiService: ApiService, private route: Router) {
-    var user = JSON.parse(localStorage.getItem("user"));
-    this.userId = user.ID;
-    this.roleId = user.Role;
+    this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   ngOnInit() {
@@ -35,7 +32,7 @@ export class FileListComponent implements OnInit {
   }
 
   FileList() {
-    this.apiService.FileList(this.userId, this.roleId).subscribe((d: Files[]) => {
+    this.apiService.FileList(this.user.ID, this.user.Role).subscribe((d: Files[]) => {
       this.files = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort;

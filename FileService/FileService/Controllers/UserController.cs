@@ -15,21 +15,21 @@ namespace FileService.Controllers
     {
         [Route("createUser")]
         [HttpPost]
-        public async Task<User> CreateUser(User usr)
+        public async Task<UserModel> CreateUser(UserModel usr)
         {
            
 
             int userId =  HelperDataLib.Insert.InsertCreateUser(usr.Name, usr.Mail, usr.Password, usr.Role);
-            User user = new User { ID=userId, Name = usr.Name, Mail = usr.Mail, Password = usr.Password, Role = usr.Role };
+            UserModel user = new UserModel { ID=userId, Name = usr.Name, Mail = usr.Mail, Password = usr.Password, Role = usr.Role };
 
             return user;
         }
 
         [Route("fileListForUser")]
         [HttpGet]
-       public IEnumerable<FileUpload> GetAllFileList(int userId, int roleId)
+       public IEnumerable<FileUploadModel> GetAllFileList(int userId, int roleId)
         {
-            List<FileUpload> fileUploads = new List<FileUpload>();
+            List<FileUploadModel> fileUploads = new List<FileUploadModel>();
 
             DataTable dt  = HelperDataLib.Select.GetAllList(userId, roleId);
 
@@ -37,7 +37,7 @@ namespace FileService.Controllers
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    FileUpload fu = new FileUpload
+                    FileUploadModel fu = new FileUploadModel
                     {
                         ID = Convert.ToInt32(dt.Rows[i]["ID"]),
                         UserID = Convert.ToInt32(dt.Rows[i]["UserID"]),
@@ -58,9 +58,9 @@ namespace FileService.Controllers
 
         [Route("login")]
         [HttpGet]
-        public User login(string mail, string password)
+        public UserModel login(string mail, string password)
         {
-            User user = new User();
+            UserModel user = new UserModel();
             DataTable dt = HelperDataLib.Select.login(mail, password);
 
             if(dt.Rows.Count != 0 && dt != null)
@@ -77,6 +77,32 @@ namespace FileService.Controllers
       
 
             return user;
+        }
+
+        [Route("userList")]
+        [HttpGet]
+        public IEnumerable<UserModel> GetUserList(int roleId)
+        {
+            List<UserModel> list = new List<UserModel>();
+            DataTable dt = HelperDataLib.Select.GetUserList(roleId);
+
+            if(dt.Rows.Count != 0 && dt != null)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    UserModel us = new UserModel
+                    {
+                        ID = Convert.ToInt32(dt.Rows[i]["ID"]),
+                        Name = dt.Rows[i]["Name"].ToString(),
+                        Mail = dt.Rows[i]["Mail"].ToString(),
+                        Password = dt.Rows[i]["Password"].ToString(),
+                        Role = Convert.ToInt32(dt.Rows[i]["Role"])
+                    };
+                    list.Add(us);
+                }
+            }
+
+            return list;
         }
     }
 }

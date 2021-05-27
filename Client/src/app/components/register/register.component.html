@@ -18,7 +18,7 @@
 
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput name="username" #username placeholder="Kullanıcı adı girin" required>
+          <input matInput name="username" #username placeholder="Kullanıcı adınız" required>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -26,7 +26,7 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input matInput name="password" #password placeholder="Password" placeholder="Parolanız" required>
+          <input matInput type="password" name="password" #password placeholder="Password" placeholder="Parolanız" required>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -39,7 +39,7 @@
 
       </mat-card-content>
 
-      <button mat-stroked-button color="accent" class="btn-block" (click)="Register(username.value, mail.value, password.value, role.value)">Register</button>
+      <button mat-stroked-button color="warn" class="btn-block" (click)="Register(username.value, mail.value, password.value, role.value)">Register</button>
       <button mat-button class="forgot text-muted" [routerLink]="['/login']" style="margin-top: 10px;">Zaten Üye misin?</button>
     </form>
   </mat-card>
