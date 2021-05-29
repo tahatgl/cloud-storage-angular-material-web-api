@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { Files } from '../models/files';
 
@@ -13,8 +13,18 @@ export class ApiService {
 constructor(private http: HttpClient) { 
 }
 
+Token(mail: string, password: string) {
+  var data = "username=" + mail + "&password=" + password + "&grant_type=password";
+  var request = new HttpHeaders({ "Content-Type" : "application/x-www-form-urlencoded" });
+  return this.http.post(this.apiUrl + "token", data, { headers: request });
+}
+
 FileList(userId: number, roleId: number) {
-  return this.http.get(this.apiUrl + "user/fileListForUser?userId=" + userId + "&roleId=" + roleId);
+  return this.http.get(this.apiUrl + "user/fileListForUser/" + userId + "/" + roleId);
+}
+
+UserList(roleId: number) {
+  return this.http.get(this.apiUrl + "user/userList?roleId=" + roleId);
 }
 
 Login(mail: string, password: string) {
@@ -31,6 +41,10 @@ Register(user: User) {
 
 FileUpload(file: FormData) {
   return this.http.post(this.apiUrl + "file/fileUpload", file);
+}
+
+UpdateUser(user: User) {
+  return this.http.put(this.apiUrl + "user/updateUser", user);
 }
 
 }

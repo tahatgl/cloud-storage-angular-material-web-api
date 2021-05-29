@@ -34,7 +34,7 @@ export class FileListComponent implements OnInit {
   FileList() {
     this.apiService.FileList(this.user.ID, this.user.Role).subscribe((d: Files[]) => {
       this.files = d;
-      this.dataSource = new MatTableDataSource(d);
+      this.dataSource = new MatTableDataSource(this.files);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -47,8 +47,9 @@ export class FileListComponent implements OnInit {
   }
 
   Logout() {
-    localStorage.removeItem("user");
-    this.route.navigate(['/login']);
+    localStorage.clear();
+    //this.route.navigate(['/login']);
+    location.href = "/";
   }
 
   SelectFile(event) {

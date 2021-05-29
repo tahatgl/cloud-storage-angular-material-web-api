@@ -1,0 +1,70 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>CloudStorage</h1>
+    <div style="margin-left: 70%;"></div>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/users']">Üyeler</button>
+        <button mat-menu-item [routerLink]="['/filesadmin']">Dosyalar</button>
+      </mat-menu>
+      <a mat-button color="warn" (click)="Logout()"> Çıkış Yap</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container" style="padding: 6%;" *ngIf="files?.length > 0">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="UserID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.UserID}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CreatedTimestamp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Oluşturma zamanı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.CreatedTimestamp}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="Names">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.Names}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ContentTypes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Tipi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.ContentTypes}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Açıklaması
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.Description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Functions">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x">
+        <button mat-icon-button color="warn" matTooltip="Sil" (click)="DeleteFile(x.ID)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+

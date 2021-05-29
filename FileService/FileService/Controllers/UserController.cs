@@ -25,7 +25,7 @@ namespace FileService.Controllers
             return user;
         }
 
-        [Route("fileListForUser")]
+        [Route("fileListForUser/{userId}/{roleId}")]
         [HttpGet]
        public IEnumerable<FileUploadModel> GetAllFileList(int userId, int roleId)
         {
@@ -55,6 +55,7 @@ namespace FileService.Controllers
 
             return fileUploads;
         }
+
 
         [Route("login")]
         [HttpGet]
@@ -103,6 +104,33 @@ namespace FileService.Controllers
             }
 
             return list;
+        }
+
+        [Route("updateUser")]
+        [HttpPut]
+        public ResultModel UserUpdate(UserModel model) //ADO net ile yapmayı bir türlü beceremedim
+        {
+            ResultModel result = new ResultModel();
+            fileUploadEntities db = new fileUploadEntities();
+
+            User user = db.User.Where(q => q.ID == model.ID).SingleOrDefault();
+
+            if(user == null)
+            {
+                result.process = false;
+                result.message = "Üye bulunamadı!";
+                return result;
+            }
+            user.Name = model.Name;
+            user.Mail = model.Mail;
+            user.Password = model.Password;
+            user.Role = model.Role;
+
+            db.SaveChanges();
+
+            result.process = true;
+            result.message = "Üye bilgileri güncellendi";
+            return result;
         }
     }
 }

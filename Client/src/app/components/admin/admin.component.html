@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>CloudStorage</h1>
+    <div style="margin-left: 70%;"></div>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/users']">Üyeler</button>
+        <button mat-menu-item [routerLink]="['/filesadmin']">Dosyalar</button>
+      </mat-menu>
+      <a mat-button color="warn" (click)="Logout()"> Çıkış Yap</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container" style="text-align: center; padding: 6%;">
+  <h1>Merhaba Admin</h1>
+</div>

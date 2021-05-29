@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './components/admin/admin.component';
+import { FileListForAdminComponent } from './components/file-list-for-admin/file-list-for-admin.component';
 import { FileListComponent } from './components/file-list/file-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserFileListForAdminComponent } from './components/user-file-list-for-admin/user-file-list-for-admin.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -21,6 +25,22 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
+    path: 'users',
+    component: UserListComponent
+  },
+  {
+    path: 'filesadmin',
+    component: FileListForAdminComponent
+  },
+  {
+    path: 'userfiles/:ID/:Role',
+    component: UserFileListForAdminComponent
   }
 ];
 

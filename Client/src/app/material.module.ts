@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 const MatModuller = [
   MatButtonModule,
@@ -29,7 +30,8 @@ const MatModuller = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatIconModule
+  MatIconModule,
+  MatMenuModule
 ];
 
 @NgModule({

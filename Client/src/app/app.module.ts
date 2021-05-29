@@ -12,13 +12,23 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { FileListForAdminComponent } from './components/file-list-for-admin/file-list-for-admin.component';
+import { UserUpdateDialogComponent } from './components/dialogs/user-update-dialog/user-update-dialog.component';
+import { UserFileListForAdminComponent } from './components/user-file-list-for-admin/user-file-list-for-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    UserListComponent,
+    FileListForAdminComponent,
+    UserUpdateDialogComponent,
+    UserFileListForAdminComponent
   ],
   imports: [
     BrowserModule,

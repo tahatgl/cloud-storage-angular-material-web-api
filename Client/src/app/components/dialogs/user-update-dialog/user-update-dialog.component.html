@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <span>Üye Güncelle</span>
+</mat-toolbar>
+
+<div class="container" style="margin-top: 4%;">
+  <form [formGroup]="frm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="Name" name="Name" required type="text">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Mail</mat-label>
+      <input matInput placeholder="Mail" formControlName="Mail" name="Mail" required type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" formControlName="Password" name="Password" required type="text">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="Rol" name="Rol" required>
+        <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>

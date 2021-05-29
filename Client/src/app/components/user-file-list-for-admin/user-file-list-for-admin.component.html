@@ -3,32 +3,44 @@
     <h1>CloudStorage</h1>
     <div style="margin-left: 70%;"></div>
     <div>
-      <a mat-button style="font-style: italic;">Merhaba {{user.Name | titlecase}}</a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/users']">Üyeler</button>
+        <button mat-menu-item [routerLink]="['/filesadmin']">Dosyalar</button>
+      </mat-menu>
       <a mat-button color="warn" (click)="Logout()"> Çıkış Yap</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="container" style="text-align: center; padding: 6%;" *ngIf="files?.length == 0">
-  <h1>Merhaba {{user.Name | titlecase}}! Henüz dosya yüklemediniz! <br><br> Şimdi yedeklemeye başlayın.</h1>
-  <div class="container" style="text-align: center; margin-top: 5%;">
-    <input type="file" hidden="true" #file (change)="SelectFile($event)">
-    <button mat-raised-button color="accent" (click)="file.click()">Dosya Seç</button>
-  
-      <mat-form-field class="example-full-width"  style="margin-left: 3%;">
-        <mat-label style="color: black;">Açıklama Ekleyin</mat-label>
-        <textarea matInput #inputt type="text" [(ngModel)]="description"></textarea>
-      </mat-form-field>
-  
-    <button mat-raised-button color="primary" (click)="Upload(file)" [disabled]="!selected || !description" style="margin-left: 3%;">Yükle</button>&nbsp;
-  </div>
+  <button mat-fab color="primary" [routerLink]="['/users']" matTooltip="Geri" style="margin-bottom: 6%;">
+    <mat-icon aria-label="label">arrow_back</mat-icon>
+  </button>
+  <h1>Üye henüz dosya yüklemesi gerçekleştirmemiş!</h1>
 </div>
 
 <div class="container" style="padding: 6%;" *ngIf="files?.length > 0">
 
-  <h2 style="color: darkblue;">Yüklü Dosyalarınız</h2>
+  <button mat-fab color="primary" [routerLink]="['/users']" matTooltip="Geri" style="margin-bottom: 6%;">
+    <mat-icon aria-label="label">arrow_back</mat-icon>
+  </button>
 
   <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="UserID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.UserID}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CreatedTimestamp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Oluşturma zamanı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let x"> {{x.CreatedTimestamp}} </mat-cell>
+    </ng-container>
     
     <ng-container matColumnDef="Names">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
@@ -64,21 +76,4 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 
-  <div class="container" style="text-align: center; margin-top: 5%;">
-    <h2 style="color:black; margin-bottom: 4%;">Yeni dosyalar ekleyin...</h2>
-    <input type="file" hidden="true" #file (change)="SelectFile($event)">
-    <button mat-raised-button color="accent" (click)="file.click()">Dosya Seç</button>
-  
-    <!--<input matInput type="text" [(ngModel)]="description" style="width: 15vw;">-->
-  
-      <mat-form-field class="example-full-width"  style="margin-left: 3%;">
-        <mat-label style="color: black;">Açıklama Ekleyin</mat-label>
-        <textarea matInput #inputt type="text" [(ngModel)]="description"></textarea>
-      </mat-form-field>
-  
-    <button mat-raised-button color="primary" (click)="Upload(file)" [disabled]="!selected || !description" style="margin-left: 3%;">Yükle</button>&nbsp;
-  </div>
-
 </div>
-
-

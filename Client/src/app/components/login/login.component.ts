@@ -14,16 +14,36 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem("user"));
     if(user) {
-      this.route.navigate(['/files']);
-  }
+      if(user.Role == 1) {
+        this.route.navigate(['/admin']);
+      }
+      else {
+        this.route.navigate(['/files'])
+      } 
+    }
   }
 
-  Login(mail: string, password: string) {
+  Loginn(mail: string, password: string) {
     this.apiService.Login(mail, password).subscribe(d => {
       localStorage.setItem("user", JSON.stringify(d));
       this.route.navigate(['/files']);
     }, err => {
       console.log(err);
+    });
+  }
+
+  Login(mail: string, password: string) {
+    this.apiService.Token(mail, password).subscribe(d => {
+      localStorage.setItem("user", JSON.stringify(d));
+      var user = JSON.parse(localStorage.getItem("user"));
+      if(user.Role == 1) {
+        this.route.navigate(['/admin']);
+      }
+      else {
+        this.route.navigate(['/files'])
+      } 
+    }, err => {
+      console.log(err.message);
     });
   }
 
