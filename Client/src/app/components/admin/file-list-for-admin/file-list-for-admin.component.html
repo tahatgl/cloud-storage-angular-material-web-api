@@ -15,20 +15,9 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="container" style="text-align: center; padding: 6%;" *ngIf="files?.length == 0">
-  <button mat-fab color="primary" [routerLink]="['/users']" matTooltip="Geri" style="margin-bottom: 6%;">
-    <mat-icon aria-label="label">arrow_back</mat-icon>
-  </button>
-  <h1>Üye henüz dosya yüklemesi gerçekleştirmemiş!</h1>
-</div>
-
 <div class="container" style="padding: 6%;" *ngIf="files?.length > 0">
 
-  <button mat-fab color="primary" [routerLink]="['/users']" matTooltip="Geri" style="margin-bottom: 6%;">
-    <mat-icon aria-label="label">arrow_back</mat-icon>
-  </button>
-
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
     <ng-container matColumnDef="UserID">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Üye ID
@@ -39,7 +28,7 @@
     <ng-container matColumnDef="CreatedTimestamp">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Oluşturma zamanı
       </mat-header-cell>
-      <mat-cell *matCellDef="let x"> {{x.CreatedTimestamp}} </mat-cell>
+      <mat-cell *matCellDef="let x"> {{x.CreatedTimestamp | date: 'dd.MM.yyyy HH:mm:ss'}} </mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="Names">
@@ -77,3 +66,5 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 
 </div>
+
+

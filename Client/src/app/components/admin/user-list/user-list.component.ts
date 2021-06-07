@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Result } from 'src/app/models/result';
 import { User } from 'src/app/models/user';
 import { ApiService } from 'src/app/services/api.service';
-import { UserUpdateDialogComponent } from '../dialogs/user-update-dialog/user-update-dialog.component';
+import { UserUpdateDialogComponent } from '../../dialogs/user-update-dialog/user-update-dialog.component';
 
 @Component({
   selector: 'app-user-list',

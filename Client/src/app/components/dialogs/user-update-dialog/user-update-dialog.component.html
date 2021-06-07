@@ -3,7 +3,7 @@
 </mat-toolbar>
 
 <div class="container" style="margin-top: 4%;">
-  <form [formGroup]="frm">
+  <form [formGroup]="frm" class="mat-elevation-z8">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput placeholder="Name" formControlName="Name" name="Name" required type="text">
@@ -26,7 +26,6 @@
       </mat-select>
     </mat-form-field>
   </form>
-
   <button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
   <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
 

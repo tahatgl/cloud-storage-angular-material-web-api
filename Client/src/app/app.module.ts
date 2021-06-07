@@ -13,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AdminComponent } from './components/admin/admin.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { FileListForAdminComponent } from './components/file-list-for-admin/file-list-for-admin.component';
+import { UserListComponent } from './components/admin/user-list/user-list.component';
+import { FileListForAdminComponent } from './components/admin/file-list-for-admin/file-list-for-admin.component';
 import { UserUpdateDialogComponent } from './components/dialogs/user-update-dialog/user-update-dialog.component';
-import { UserFileListForAdminComponent } from './components/user-file-list-for-admin/user-file-list-for-admin.component';
+import { UserFileListForAdminComponent } from './components/admin/user-file-list-for-admin/user-file-list-for-admin.component';
 
 @NgModule({
   declarations: [
