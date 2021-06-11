@@ -46,12 +46,12 @@ export class UserFileListForAdminComponent implements OnInit {
     });
   }
 
-  DownloadFile(id: number, type: string, name: string) {
-    this.apiService.FileDownload(id).subscribe(res => {
-      let blob: any = new Blob([res], { type: type });
+  DownloadFile(file: Files) {
+    this.apiService.FileDownload(file.ID).subscribe(res => {
+      let blob: any = new Blob([res], { type: file.ContentTypes });
       const url = window.URL.createObjectURL(blob);
       window.open(url);
-      fileSaver.saveAs(blob, name);
+      fileSaver.saveAs(blob, file.Names);
     });
   }
 
