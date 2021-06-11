@@ -56,6 +56,10 @@
         <button mat-icon-button color="warn" matTooltip="Sil" (click)="DeleteFile(x.ID)">
           <mat-icon aria-label="label">delete</mat-icon>
         </button>
+
+        <button mat-icon-button color="primary" matTooltip="İndir" (click)="DownloadFile(x.ID, x.ContentTypes, x.Names)">
+          <mat-icon aria-label="label">file_download</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 

@@ -17,6 +17,7 @@ import { UserListComponent } from './components/admin/user-list/user-list.compon
 import { FileListForAdminComponent } from './components/admin/file-list-for-admin/file-list-for-admin.component';
 import { UserUpdateDialogComponent } from './components/dialogs/user-update-dialog/user-update-dialog.component';
 import { UserFileListForAdminComponent } from './components/admin/user-file-list-for-admin/user-file-list-for-admin.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { UserFileListForAdminComponent } from './components/admin/user-file-list
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

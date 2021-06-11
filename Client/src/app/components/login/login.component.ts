@@ -23,15 +23,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  Loginn(mail: string, password: string) {
-    this.apiService.Login(mail, password).subscribe(d => {
-      localStorage.setItem("user", JSON.stringify(d));
-      this.route.navigate(['/files']);
-    }, err => {
-      console.log(err);
-    });
-  }
-
   Login(mail: string, password: string) {
     this.apiService.Token(mail, password).subscribe(d => {
       localStorage.setItem("user", JSON.stringify(d));

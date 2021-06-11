@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { Files } from '../models/files';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +28,16 @@ UserList(roleId: number) {
   return this.http.get(this.apiUrl + "user/userList?roleId=" + roleId);
 }
 
-Login(mail: string, password: string) {
+/*Login(mail: string, password: string) {
   return this.http.get(this.apiUrl + "user/login?mail=" + mail + "&password=" + password);
-}
+}*/
 
 DeleteFile(id: number) {
   return this.http.get(this.apiUrl + "file/deleteFile?id=" + id);
+}
+
+DeleteUser(id: number) {
+  return this.http.get(this.apiUrl + "user/deleteUser?id=" + id);
 }
 
 Register(user: User) {
@@ -41,6 +46,10 @@ Register(user: User) {
 
 FileUpload(file: FormData) {
   return this.http.post(this.apiUrl + "file/fileUpload", file);
+}
+
+FileDownload(id: number): any {
+  return this.http.get(this.apiUrl + "file/filedownload/" + id, {responseType: 'blob'});
 }
 
 UpdateUser(user: User) {

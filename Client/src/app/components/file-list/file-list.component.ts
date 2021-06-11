@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import * as fileSaver from 'file-saver';
+
 @Component({
   selector: 'app-file-list',
   templateUrl: './file-list.component.html',
@@ -44,6 +46,15 @@ export class FileListComponent implements OnInit {
     this.apiService.DeleteFile(id).subscribe(q => {
       this.FileList();
     })
+  }
+
+  DownloadFile(id: number, type: string, name: string) {
+    this.apiService.FileDownload(id).subscribe(res => {
+      let blob: any = new Blob([res], { type: type });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+      fileSaver.saveAs(blob, name);
+    });
   }
 
   Logout() {

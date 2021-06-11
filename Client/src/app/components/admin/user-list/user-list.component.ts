@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { Result } from 'src/app/models/result';
 import { User } from 'src/app/models/user';
 import { ApiService } from 'src/app/services/api.service';
@@ -22,7 +23,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<UserUpdateDialogComponent>;
 
-  constructor(private apiService: ApiService, private matDialog: MatDialog) { 
+  constructor(private apiService: ApiService, private matDialog: MatDialog, private toastr: ToastrService) { 
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       this.role = user.Role;
@@ -81,6 +82,19 @@ export class UserListComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  DeleteUser(id: number) {
+    this.apiService.DeleteUser(id).subscribe(q => {
+      if(q == false) {
+        this.toastr.warning("Önce üye dosyalarını silin", "Üye'nin dosyaları var bu üye silinemez!", {positionClass: 'toastr-top-left'});
+      }
+      else {
+        this.UserList();
+      }
+    }, err => {
+      console.log(err);
     });
   }
 

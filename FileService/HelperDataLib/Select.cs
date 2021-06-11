@@ -54,7 +54,7 @@ namespace HelperDataLib
             return dt;
         }
 
-        public static DataTable GetById(int id)
+        public static DataTable GetFileById(int id)
         {
             DataTable dt = new DataTable();
             SqlConnection con = Connection.OpenConnection();
@@ -71,6 +71,83 @@ namespace HelperDataLib
                     if (con.State != ConnectionState.Open)
                     {
                         con.Open();
+
+                    }
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return dt;
+        }
+
+        public static DataTable GetFileByUserId(int id)
+        {
+            DataTable dt = new DataTable();
+            SqlConnection con = Connection.OpenConnection();
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"select * from FileUpload where UserID = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+
+                    }
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return dt;
+        }
+
+        public static DataTable GetUserById(int id)
+        {
+            DataTable dt = new DataTable();
+            SqlConnection con = Connection.OpenConnection();
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"select * from [User] where ID = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+
                     }
 
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))

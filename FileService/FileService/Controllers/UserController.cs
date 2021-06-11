@@ -71,11 +71,7 @@ namespace FileService.Controllers
                 user.Mail = dt.Rows[0]["Mail"].ToString();
                 user.Password = dt.Rows[0]["Password"].ToString();
                 user.Role = Convert.ToInt32(dt.Rows[0]["Role"]);
-
-                
             }
-
-      
 
             return user;
         }
@@ -104,6 +100,30 @@ namespace FileService.Controllers
             }
 
             return list;
+        }
+
+        [Route("deleteUser")]
+        [HttpGet]
+        public bool DeleteUser(int id)
+        {
+            DataTable dt = HelperDataLib.Select.GetUserById(id);
+            bool status = false;
+
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                DataTable data = HelperDataLib.Select.GetFileByUserId(id);
+                if (data != null && data.Rows.Count != 0)
+                {
+                    return status;
+                }
+                else
+                {
+                    status = HelperDataLib.Delete.DeleteUser(id);
+                }
+
+            }
+
+            return status;
         }
 
         [Route("updateUser")]

@@ -1,12 +1,15 @@
 ﻿using FileService.Models;
+using HelperDataLib;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -53,7 +56,7 @@ namespace FileService.Controllers
         [HttpGet]
         public bool DeleteFile(int id)
         {
-            DataTable dt = HelperDataLib.Select.GetById(id);
+            DataTable dt = HelperDataLib.Select.GetFileById(id);
             bool status = false;
 
             if (dt != null && dt.Rows.Count != 0)
@@ -65,6 +68,34 @@ namespace FileService.Controllers
             }
 
             return status;
+        }
+
+        [Route("filedownload/{id}")]
+        [HttpGet]
+        public HttpResponseMessage Download(int id)
+        {
+            DataTable dt = HelperDataLib.Select.GetFileById(id);
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                string filePath = dt.Rows[0]["FileNames"].ToString();
+                string fileName = dt.Rows[0]["Names"].ToString();
+
+                var fileBytes = File.ReadAllBytes(filePath);
+                var fileMemStream = new MemoryStream(fileBytes);
+
+                result.Content = new StreamContent(fileMemStream);
+
+                var headers = result.Content.Headers;
+
+                headers.ContentDisposition = new ContentDispositionHeaderValue("hedef");
+                headers.ContentDisposition.FileName = fileName;
+                headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                headers.ContentLength = fileMemStream.Length;
+            }
+
+            return result;
         }
     }
 

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Files } from 'src/app/models/files';
 import { ApiService } from 'src/app/services/api.service';
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-user-file-list-for-admin',
@@ -42,6 +43,15 @@ export class UserFileListForAdminComponent implements OnInit {
   DeleteFile(id: number) {
     this.apiService.DeleteFile(id).subscribe(q => {
       this.FileList();
+    });
+  }
+
+  DownloadFile(id: number, type: string, name: string) {
+    this.apiService.FileDownload(id).subscribe(res => {
+      let blob: any = new Blob([res], { type: type });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+      fileSaver.saveAs(blob, name);
     });
   }
 

@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Files } from 'src/app/models/files';
 import { ApiService } from 'src/app/services/api.service';
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-file-list-for-admin',
@@ -40,6 +41,15 @@ export class FileListForAdminComponent implements OnInit {
     this.apiService.DeleteFile(id).subscribe(q => {
       this.FileList();
     })
+  }
+
+  DownloadFile(id: number, type: string, name: string) {
+    this.apiService.FileDownload(id).subscribe(res => {
+      let blob: any = new Blob([res], { type: type });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+      fileSaver.saveAs(blob, name);
+    });
   }
 
   Logout() {

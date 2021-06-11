@@ -54,10 +54,15 @@
       </mat-header-cell>
       <mat-cell *matCellDef="let x">
         <button mat-icon-button color="accent" matTooltip="Üye dosyaları" [routerLink]="['/userfiles', x.ID, x.Role]">
-          <mat-icon aria-label="label">insert_drive_file</mat-icon>
+          <mat-icon aria-label="label">find_in_page</mat-icon>
         </button>
-        <button mat-icon-button color="primary" matTooltip="Üye işlemleri" (click)="UpdateUser(x)">
+
+        <button mat-icon-button color="primary" matTooltip="Üye Güncelle" (click)="UpdateUser(x)">
           <mat-icon aria-label="label">manage_accounts</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" matTooltip="Üye sil" (click)="DeleteUser(x.ID)">
+          <mat-icon aria-label="label">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
