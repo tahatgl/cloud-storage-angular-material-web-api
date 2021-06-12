@@ -87,7 +87,7 @@ export class UserListComponent implements OnInit {
 
   DeleteUser(id: number) {
     this.apiService.DeleteUser(id).subscribe(q => {
-      if(q == false) {
+      if(!q) {
         this.toastr.warning("Önce üye dosyalarını silin", "Üye'nin dosyaları var bu üye silinemez!", {positionClass: 'toastr-top-left'});
       }
       else {
