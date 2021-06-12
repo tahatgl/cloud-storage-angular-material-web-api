@@ -29,6 +29,7 @@ namespace FileService.Controllers
         public async Task<FileUploadModel> UploadSingleFile()
         {
             var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
+
             await Request.Content.ReadAsMultipartAsync(streamProvider);
 
             FileUploadModel fu = new FileUploadModel
