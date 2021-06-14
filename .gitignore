@@ -74,7 +74,4 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 
-*.png
-*.docx
-*.pdf
-*.jpg
+Teslim/
